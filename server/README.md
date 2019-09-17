@@ -1,6 +1,3 @@
-## Build Setup
-
-``` bash
 # build
 go build mainapi.go 
 
@@ -8,7 +5,7 @@ go build mainapi.go
 go run mainapi
 
 
-## * go build 命令更多参数学习，使用$ go tool compile
+# * go build 命令更多参数学习，使用$ go tool compile
 usage: compile [options] file.go...
   -%    debug non-static initializers
   -+    compiling runtime
