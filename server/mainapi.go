@@ -1,12 +1,10 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	"server/config"
+	"server/api"
+	_ "server/api/user"
 )
 
 func main() {
-	router := gin.Default()
-	config.RouterInit(router)
-	router.Run(":8082")
+	api.NewServer().Run(":8082")
 }
