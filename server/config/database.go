@@ -3,6 +3,7 @@ package config
 import (
 	"database/sql"
 	"fmt"
+	"github.com/gin-gonic/gin"
 	"log"
 	"net"
 	"strings"
@@ -25,9 +26,9 @@ func init() {
 	mysql.RegisterDial("failover", failoverDial)
 }
 
-func initDatabase(config Config) {
-	switch config.String("mode") {
-	case "dev":
+func InitDatabase() {
+	switch gin.Mode() {
+	case "debug":
 		dbAddress["db"] = "127.0.0.1:3306"
 		dbUsername["db"] = "root"
 		dbPassword["db"] = "123456"

@@ -8,5 +8,4 @@ require (
 	github.com/gin-gonic/gin v1.4.0
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/json-iterator/go v1.1.6
-	google.golang.org/appengine v1.6.4 // indirect
 )

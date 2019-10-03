@@ -7,18 +7,14 @@ import (
 
 const (
 	// InternalError  服务器内部错误
-	InternalError = iota + 5000
-
+	InternalError = iota + 50000
 	// IllegalArgument 参数错误
 	IllegalArgument
-
 	// DatabaseError 数据库错误
 	DatabaseError
-
 	// HTTPError HTTP请求错误
 	HTTPError
-
-	// ExternalError 外部接口请求错误
+	// ExternalError 接口请求错误
 	ExternalError
 	// UnmarshalTypeFail 结构解析错误
 	UnmarshalTypeFail
@@ -73,7 +69,7 @@ func AddInitializer(fc func(Config)) {
 // Initialize initialize process configure
 func Initialize(c Config) {
 	config = c
-	initDatabase(c)
+	InitDatabase()
 	for _, initFunc := range initializers {
 		initFunc(c)
 	}

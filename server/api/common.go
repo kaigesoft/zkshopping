@@ -3,27 +3,32 @@ package api
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"os"
+	"server/config"
 	"server/tools"
 	"strconv"
 	"strings"
 )
-
+var Layout = "2006-01-02 15:04:05"
 // NewServer create server
 func NewServer() *gin.Engine {
 	r := gin.Default()
-	//config.Set("mode","test")
-	//mode := config.String("mode")
-	//switch mode {
-	//case "debug":
-	//	gin.SetMode(gin.DebugMode)
-	//case "test":
-	//	gin.SetMode(gin.TestMode)
-	//case "release":
-	//	gin.SetMode(gin.ReleaseMode)
-	//default:
-	//	gin.SetMode(gin.DebugMode)
-	//}
-
+	mode := os.Getenv("MODE")
+	s := os.Environ()
+	if len(s) > 0 {
+		mode = s[0]
+	}
+	switch mode {
+	case "debug":
+		gin.SetMode(gin.DebugMode)
+	case "test":
+		gin.SetMode(gin.TestMode)
+	case "release":
+		gin.SetMode(gin.ReleaseMode)
+	default:
+		gin.SetMode(gin.DebugMode)
+	}
+	config.InitDatabase()
 	for _, reg := range routerRegisters {
 		reg(&RouterGroup{
 			routerGroup: &r.RouterGroup,

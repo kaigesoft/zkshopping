@@ -9,5 +9,6 @@ func init() {
 		userRouteGroup := router.Group("/user")
 		//用户相关加载
 		userRouteGroup.StdGET("getUserList", DoGetUserInfoList)
+		userRouteGroup.StdPOST("saveUserInfo", DoSaveUserInfo)
 	})
 }

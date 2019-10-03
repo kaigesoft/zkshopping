@@ -14,7 +14,6 @@ import (
 	"path"
 	"reflect"
 	"runtime"
-	"server/tools"
 )
 
 var logger seelog.LoggerInterface
@@ -41,16 +40,13 @@ type Context struct {
 // and writes to log with level = Trace.
 func (c *Context) Tracef(format string, params ...interface{}) {
 	msg := fmt.Sprintf(c.requestID+" "+format, params...)
-	tools.WriteApiLog(c.requestID, "Trace", msg)
 	logger.Trace(msg)
-
 }
 
 // Debugf formats message according to format specifier
 // and writes to log with level = Debug.
 func (c *Context) Debugf(format string, params ...interface{}) {
 	msg := fmt.Sprintf(c.requestID+" "+format, params...)
-	tools.WriteApiLog(c.requestID, "Debug", msg)
 	logger.Debug(msg)
 }
 
@@ -58,16 +54,13 @@ func (c *Context) Debugf(format string, params ...interface{}) {
 // and writes to log with level = Info.
 func (c *Context) Infof(format string, params ...interface{}) {
 	msg := fmt.Sprintf(c.requestID+" "+format, params...)
-	tools.WriteApiLog(c.requestID, "Info", msg)
 	logger.Info(msg)
-
 }
 
 // Warnf formats message according to format specifier
 // and writes to log with level = Warn.
 func (c *Context) Warnf(format string, params ...interface{}) error {
 	msg := fmt.Sprintf(format, params...)
-	tools.WriteApiLog(c.requestID, "Warn", msg)
 	logger.Warn(c.requestID, msg)
 	return errors.New(msg)
 }
@@ -76,7 +69,6 @@ func (c *Context) Warnf(format string, params ...interface{}) error {
 // and writes to log with level = Error.
 func (c *Context) Errorf(format string, params ...interface{}) error {
 	msg := fmt.Sprintf(format, params...)
-	tools.WriteApiLog(c.requestID, "Error", msg)
 	logger.Error(msg)
 	return errors.New(msg)
 }
@@ -85,7 +77,6 @@ func (c *Context) Errorf(format string, params ...interface{}) error {
 // and writes to log with level = Critical.
 func (c *Context) Criticalf(format string, params ...interface{}) error {
 	msg := fmt.Sprintf(format, params...)
-	tools.WriteApiLog(c.requestID, "Critical", msg)
 	logger.Critical(msg)
 	return errors.New(msg)
 }
@@ -94,7 +85,6 @@ func (c *Context) Criticalf(format string, params ...interface{}) error {
 // and writes to log with level = Trace
 func (c *Context) Trace(v ...interface{}) {
 	msg := c.requestID + " " + fmt.Sprint(v...)
-	tools.WriteApiLog(c.requestID, "Trace", msg)
 	logger.Trace(msg)
 }
 
@@ -102,7 +92,6 @@ func (c *Context) Trace(v ...interface{}) {
 // and writes to log with level = Debug
 func (c *Context) Debug(v ...interface{}) {
 	msg := c.requestID + " " + fmt.Sprint(v...)
-	tools.WriteApiLog(c.requestID, "Debug", msg)
 	logger.Debug(msg)
 }
 
@@ -110,7 +99,6 @@ func (c *Context) Debug(v ...interface{}) {
 // and writes to log with level = Info
 func (c *Context) Info(v ...interface{}) {
 	msg := c.requestID + " " + fmt.Sprint(v...)
-	tools.WriteApiLog(c.requestID, "Info", msg)
 	logger.Info(msg)
 }
 
@@ -118,7 +106,6 @@ func (c *Context) Info(v ...interface{}) {
 // and writes to log with level = Warn
 func (c *Context) Warn(v ...interface{}) error {
 	msg := fmt.Sprint(v...)
-	tools.WriteApiLog(c.requestID, "Warn", msg)
 	logger.Warn(c.requestID + " " + msg)
 	return errors.New(msg)
 }
@@ -127,7 +114,6 @@ func (c *Context) Warn(v ...interface{}) error {
 // and writes to log with level = Error
 func (c *Context) Error(v ...interface{}) error {
 	msg := fmt.Sprint(v...)
-	tools.WriteApiLog(c.requestID, "Error", msg)
 	logger.Error(c.requestID + " " + msg)
 	return errors.New(msg)
 }
@@ -136,7 +122,6 @@ func (c *Context) Error(v ...interface{}) error {
 // and writes to log with level = Critical
 func (c *Context) Critical(v ...interface{}) error {
 	msg := fmt.Sprint(v...)
-	tools.WriteApiLog(c.requestID, "Critical", msg)
 	logger.Critical(c.requestID + " " + msg)
 	return errors.New(msg)
 }

@@ -49,7 +49,7 @@ type UserInfo struct {
 
 // Add 插入UserInfo
 func (c UserInfoConnection) Add(model *UserInfo) (int64, error) {
-	sqlStr := "INSERT INTO `tbUserInfo` (`userName`, `userGroupId`, `userDesc`, `status`, `statusTime`, `creator`, `createTime`, `updater`, `watcher`) VALUES(?, ?, ?, ?, ?, ?, now(), ?, ?)"
+	sqlStr := "INSERT INTO `tbUserInfo` (`userName`, `userGroupId`, `userDesc`, `status`, `statusTime`, `creator`, `createTime`, `updater`, `updateTime`, `watcher`) VALUES(?, ?, ?, ?, ?, ?, now(), ?, now(), ?)"
 	result, err := c().Exec(sqlStr, model.UserName, model.UserGroupID, model.UserDesc, model.Status, model.StatusTime, model.Creator, model.Updater, model.Watcher)
 	if err != nil {
 		return 0, err
@@ -208,7 +208,7 @@ func GetUserInfo(condition string, args ...interface{}) (*UserInfo, error) {
 
 // Update 更新UserInfo
 func (c UserInfoConnection) Update(model *UserInfo) (int64, error) {
-	sqlStr := "UPDATE `tbUserInfo` SET `userName` = ?, `userGroupId` = ?, `userDesc` = ?, `status` = ?, `statusTime` = ?, `creator` = ?, `updater` = ?, `watcher` = ? WHERE `id` = ?"
+	sqlStr := "UPDATE `tbUserInfo` SET `userName` = ?, `userGroupId` = ?, `userDesc` = ?, `status` = ?, `statusTime` = ?, `creator` = ?, `updater` = ?, `updateTime` = now(), `watcher` = ? WHERE `id` = ?"
 	result, err := c().Exec(sqlStr, model.UserName, model.UserGroupID, model.UserDesc, model.Status, model.StatusTime, model.Creator, model.Updater, model.Watcher, model.ID)
 	if err != nil {
 		return 0, err
