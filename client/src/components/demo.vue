@@ -11,21 +11,19 @@ import axios from 'axios'
 export default {
     data() {
         return {
-            namee: 'Cart1321',
+            namee: 'UserList',
             show: '',
             status: ''
         }
     },
     mounted() {
-        axios.get("http://localhost:8082" + '/uList')
-            .then((response) => {
-                console.log(response.data);
-                this.status = response.status;
-                this.show = response.data;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        axios.get("/api/user/getUserList").then((response) => {
+            console.log(response.data);
+            this.status = response.status;
+            this.show = response.data;
+        }).catch((error) => {
+            console.log(error);
+        });
     }
 }
 </script>

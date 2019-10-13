@@ -323,7 +323,8 @@ func wrapHandlers(handlers []HandlerFunc) []gin.HandlerFunc {
 
 func wrapHandler(h HandlerFunc) gin.HandlerFunc {
 	return func(c *gin.Context) {
-
+		c.Header("Access-Control-Allow-Origin","*")
+		//c.Header("Access-Control-Allow-Method","POST,GET")
 		requestID := c.GetString(_RequestIDKey)
 		if len(requestID) == 0 {
 			id := make([]byte, 16)
