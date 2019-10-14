@@ -9,6 +9,7 @@ import (
 	"strconv"
 	"strings"
 )
+
 var Layout = "2006-01-02 15:04:05"
 // NewServer create server
 func NewServer() *gin.Engine {
@@ -34,7 +35,6 @@ func NewServer() *gin.Engine {
 			routerGroup: &r.RouterGroup,
 		})
 	}
-
 	return r
 }
 

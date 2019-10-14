@@ -20,7 +20,6 @@ var logger seelog.LoggerInterface
 
 func init() {
 	var err error
-
 	logger, err = seelog.LoggerFromConfigAsBytes([]byte(handlerLogConfig))
 	if err != nil {
 		panic(err)
