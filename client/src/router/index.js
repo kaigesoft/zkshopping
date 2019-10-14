@@ -17,5 +17,6 @@ export default new Router({
       name: 'demo',
       component: demo
     }
-  ]
+  ],
+  mode: "history" //把Router的mode修改为history模式,VueRouter默认的模式为HASH模式
 })

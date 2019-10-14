@@ -6,15 +6,17 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
-    // Paths
+    env: require('./dev.env'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {  //使用"/api"来代替"http://localhost:8082" 
         target: 'http://localhost:8082', //源地址 
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
         changeOrigin: true, //改变源 
-        pathRewrite: { 
+        pathRewrite: {
           '^/api': 'http://localhost:8082' //路径重写 
         }
       }
@@ -23,12 +25,12 @@ module.exports = {
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
-    autoOpenBrowser: false,
+    autoOpenBrowser: true,
     errorOverlay: true,
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-    
+
     /**
      * Source Maps
      */
@@ -45,6 +47,7 @@ module.exports = {
   },
 
   build: {
+    env: process.env.NODE_ENV === 'development' ? require('./dev.env') : require('./prod.env'),
     // Template for index.html
     index: path.resolve(__dirname, '../dist/index.html'),
 
